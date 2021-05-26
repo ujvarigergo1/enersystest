@@ -1,44 +1,47 @@
 <form id="loginForm" #myForm="ngForm" (ngSubmit)="send(myForm)" novalidate class="container my-2">
+    <div class="form-group row">
+      <div class="col col-xs-4">
+        <label for="api">Api kulcs</label>
+        <input [(ngModel)]="api" name="api" id="api" class="form-control" placeholder="Név" required="True">
+      </div>
+      <div class="col col-xs-4 align-self-end">
+        <button (click)="test()" class="btn btn-primary m-1" >Api teszt</button>
+      </div>
+    </div>
     
     <div class="form-group">
-      <label for="api">Api kulcs</label>
-      <input [(ngModel)]="api" name="api" id="api" class="form-control" placeholder="Név" required="True">
+      <label for="email">Email</label>
+      <input [(ngModel)]="newUser.email" name="email" id="email" class="form-control" placeholder="Email" required="True">
     </div>
     <div class="form-group">
-        <label for="email">Email</label>
-        <input  name="email" id="email" class="form-control" placeholder="Név" required="True">
-      </div>
-      <div class="form-group">
-        <label for="veznev">Vezetéknév</label>
-        <input  name="veznev" id="veznev" class="form-control" placeholder="Név" required="True">
-      </div>
-      <div class="form-group">
-        <label for="kernev">Keresztnév</label>
-        <input  name="kernev" id="kernev" class="form-control" placeholder="Név" required="True">
-      </div>
-      <div class="form-group">
-        <label for="zip">Irányítószám</label>
-        <input  name="zip" id="zip" class="form-control" placeholder="Név" required="True">
-      </div>
-      <div class="form-group">
-        <label for="varos">Város</label>
-        <input  name="varos" id="varos" class="form-control" placeholder="Név" required="True">
-      </div>
-      <div class="form-group">
-        <label for="cim">Cím</label>
-        <input  name="cim" id="cim" class="form-control" placeholder="Név" required="True">
-      </div>
-      <div class="form-group">
-        <label for="tele">Telefonszám</label>
-        <input name="tele" id="tele" class="form-control" placeholder="Név" required="True">
-      </div>
-    <div class="row">
-      <button type="submit" class="btn btn-primary mx-1" >Létrehozás</button>
+      <label for="veznev">Vezetéknév</label>
+      <input [(ngModel)]="newUser.first_name"  name="veznev" id="veznev" class="form-control" placeholder="Vezetéknév" required="True">
     </div>
+    <div class="form-group">
+      <label for="kernev">Keresztnév</label>
+      <input [(ngModel)]="newUser.last_name" name="kernev" id="kernev" class="form-control" placeholder="Keresztnév" required="True">
+    </div>
+    <div class="form-group">
+      <label for="zip">Irányítószám</label>
+      <input [(ngModel)]="newUser.zip" name="zip" id="zip" class="form-control" placeholder="Irányítószám" required="True">
+    </div>
+    <div class="form-group">
+      <label for="varos">Város</label>
+      <input [(ngModel)]="newUser.city" name="varos" id="varos" class="form-control" placeholder="Város" required="True">
+    </div>
+    <div class="form-group">
+      <label for="cim">Cím</label>
+      <input [(ngModel)]="newUser.address" name="cim" id="cim" class="form-control" placeholder="Cím" required="True">
+    </div>
+    <div class="form-group">
+      <label for="tele">Telefonszám</label>
+      <input [(ngModel)]="newUser.phone" name="tele" id="tele" class="form-control" placeholder="Telefonszám" required="True">
+    </div>
+    <button type="submit" class="btn btn-primary mx-1" >Létrehozás</button>
   </form>
 
-
-  <table mdbTable>
+  <h1 class="container mt-5">Felhasználók</h1>
+  <table class="container" mdbTable>
     <thead>
       <tr>
         <th *ngFor="let head of displayedColumns" scope="col">{{head}} </th>
@@ -46,8 +49,16 @@
     </thead>
     <tbody>
       <tr mdbTableCol *ngFor="let el of dataSource">
-        <th scope="row">{{el.id}}</th>
-        <td>{{el.name}}</td>
+        <th scope="row">{{el.first_name}}</th>
+        <td>{{el.last_name}}</td>
+        <td>{{el.zip}}</td>
+        <td>{{el.city}}</td>
+        <td>{{el.address}}</td>
+        <td>{{el.phone}}</td>
+        <td>{{el.email}}</td>
+        <td>{{el.updated_at}}</td>
+        <td>{{el.created_at}}</td>
+        <td><button (click)="delete(el)" class="btn btn-danger">Töröl</button></td>
       </tr>
     </tbody>
   </table>
